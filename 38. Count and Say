@@ -1,0 +1,53 @@
+class Solution {
+public:
+    string countAndSay(int n) {
+        //TC: O(L1 + L2 + ... + Ln)
+        //SC: O(n + Ln)
+        // if (n==1) return "1";
+        // if (n==2) return "11";
+
+        // string prev=countAndSay(n-1);
+        // int size=prev.size();
+        // int count=1;
+        // string res="";
+        // for (int c=0;c<prev.size()-1;c++){
+        //     if (prev[c]==prev[c+1])
+        //     {
+        //         count++;
+        //     }
+        //     else {
+        //         res+=to_string(count);
+        //         res+=prev[c];
+        //         count=1;
+        //     }
+        // }
+        // res+=to_string(count);
+        // res+=prev[size-1];
+        // return res;
+
+        // optimised code
+        //TC: O(L1 + L2 + ... + Ln)
+        //SC: O(Ln)
+        string ans="1";
+        for (int c=2;c<=n;c++)
+        {
+            int size=ans.size();
+            string temp="";
+            int j=0;
+            while (j<size)
+            {
+                int count=1;
+                while (j+1<size && ans[j]==ans[j+1])
+                {
+                count++;
+                j++;
+                } 
+                temp+=to_string(count);
+                temp+=ans[j];
+                j++;
+            }
+            ans=temp;
+        }
+        return ans;
+    }
+};
