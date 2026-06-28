@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int row,col;
+    int solve(vector<vector<int>>& grid, int i, int j, vector<vector<int>>& dp) {
+    if (i == row-1 && j == col-1) return grid[i][j];
+    if (i >= row || j >= col) return INT_MAX;  // ✅ fixed
+    
+    if (dp[i][j] != -1) return dp[i][j];       // ✅ memo check
+    
+    int down  = solve(grid, i+1, j, dp);
+    int right = solve(grid, i, j+1, dp);
+    
+    return dp[i][j] = grid[i][j] + min(down, right); // ✅ add current cell once
+    
+    }
+    int minPathSum(vector<vector<int>>& grid) {
+        // TC-> O(m*n) SC-> O(m*n)
+        row=grid.size();
+        col=grid[0].size();
+        vector<vector<int>> dp(row,vector<int>(col,-1));
+
+        return solve(grid,0,0,dp);
+    }
+};
