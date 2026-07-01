@@ -2,16 +2,26 @@ class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
         // 1st Linked list
-        // todo next 
+        // TC-> O(N) SC-> O(N)
+        list<int> dll;
+        for (int i:nums) dll.push_back(i);
+
+        k=k%nums.size();
+        while (k--){
+            dll.push_front(dll.back());
+            dll.pop_back();
+        }
+        int i=0;
+        for (auto l:dll) nums[i++]=l;
 
         // 2nd reverse array and reverse upto 1st k indexes and remaining
         // Time Complexity: O(n)
         // Space Complexity: O(1)
-        k = k % nums.size();
-        if (k==0 || nums.size()==1) return;
-        reverse(nums.begin(),nums.end());
-        reverse(nums.begin(),nums.begin()+k);
-        reverse(nums.begin()+k,nums.end());
+        // k = k % nums.size();
+        // if (k==0 || nums.size()==1) return;
+        // reverse(nums.begin(),nums.end());
+        // reverse(nums.begin(),nums.begin()+k);
+        // reverse(nums.begin()+k,nums.end());
 
     }
 };
