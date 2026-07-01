@@ -14,10 +14,30 @@ public:
     vector<int> res;
     vector<int> inorderTraversal(TreeNode* root) {
         // TC-> O(N) SC-> O(N)
-        if (!root) return res;
-        inorderTraversal(root->left);
-        res.push_back(root->val);
-        inorderTraversal(root->right);
+        // if (!root) return res;
+        // inorderTraversal(root->left);
+        // res.push_back(root->val);
+        // inorderTraversal(root->right);
+        // return res;
+
+        // Iterative way using stack
+         // TC-> O(N) SC-> O(N)
+        stack<TreeNode*> st;
+        while (root || !st.empty()){
+            
+            if (root)
+            {
+                st.push(root);
+                root=root->left;
+            }
+
+            else{
+                TreeNode* nodes=st.top();
+                res.push_back(st.top()->val);
+                st.pop();
+                root=nodes->right;
+            }
+        }
         return res;
     }
 };
